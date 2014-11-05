@@ -34,7 +34,7 @@ sourceSets {
     }
 }
 
-task(rspec, type: JavaExec) {
+task(rspec, type: JavaExec, dependsOn: 'classes') {
     main 'org.jruby.Main'
     classpath configurations.rspec + runtimeClasspath
     args 'classpath:bin/rspec', 'src/spec/ruby'
