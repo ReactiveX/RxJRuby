@@ -16,15 +16,15 @@ module Rx
   module Lang
     module Jruby
       class Interop
-        WRAPPERS = {
-          Java::RxUtilFunctions::Action         => Java::RxLangJruby::JRubyActionWrapper,
-          Java::Rx::Observable::OnSubscribeFunc => false
-        }
+        WRAPPERS = [
+          [Java::Rx::Observable::OnSubscribe, false],
+          [Java::RxFunctions::Action, Java::RxLangJruby::JRubyActionWrapper]
+        ]
 
-        WRAPPERS.default = Java::RxLangJruby::JRubyFunctionWrapper
+        DEFAULT_WRAPPER = Java::RxLangJruby::JRubyFunctionWrapper
 
         KLASSES  = [Java::Rx::Observable, Java::RxObservables::BlockingObservable]
-        FUNCTION = Java::RxUtilFunctions::Function.java_class
+        FUNCTION = Java::RxFunctions::Function.java_class
         RUNTIME  = JRuby.runtime
 
         def self.instance
@@ -48,10 +48,10 @@ module Rx
                   type.ruby_class.ancestors.include?(java_class)
                 end
 
-                # Skip OnSubscribeFuncs
+                # Skip OnSubscribes
                 next if constructor && constructor.last == false
 
-                constructor = (constructor && constructor.last) || WRAPPERS.default
+                constructor = (constructor && constructor.last) || DEFAULT_WRAPPER
 
                 parameter_types[[method.name, method.static?]][idx] ||= []
                 parameter_types[[method.name, method.static?]][idx] << constructor
