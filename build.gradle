@@ -34,7 +34,6 @@ sourceSets {
     }
 }
 
-/*
 task(rspec, type: JavaExec) {
     main 'org.jruby.Main'
     classpath configurations.rspec + runtimeClasspath
@@ -42,4 +41,3 @@ task(rspec, type: JavaExec) {
 }
 
 tasks.build.dependsOn << 'rspec'
-*/
