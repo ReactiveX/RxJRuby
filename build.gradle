@@ -40,4 +40,4 @@ task(rspec, type: JavaExec) {
     args 'classpath:bin/rspec', 'src/spec/ruby'
 }
 
-tasks.build.dependsOn << 'rspec'
+tasks.check.dependsOn << 'rspec'
