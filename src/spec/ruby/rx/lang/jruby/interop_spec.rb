@@ -21,8 +21,8 @@ describe Rx::Lang::Jruby::Interop do
 
   context "with a normal, non-function method signature" do
     it "calls straight through to the original Java method" do
-      observable.should_not_receive(:toBlockingObservable_without_wrapping)
-      observable.toBlockingObservable.should be_a(Java::RxObservables::BlockingObservable)
+      observable.should_not_receive(:toBlocking_without_wrapping)
+      observable.toBlocking.should be_a(Java::RxObservables::BlockingObservable)
     end
   end
 
@@ -43,7 +43,7 @@ describe Rx::Lang::Jruby::Interop do
       observable.subscribe(1)
     end
 
-    it "doesn't wrap OnSubscribeFunc arguments" do
+    it "doesn't wrap OnSubscribe arguments" do
       proc = lambda {|observer| observer.onNext("hi")}
       Java::Rx::Observable.__persistent__ = true
       Java::Rx::Observable.should_not_receive(:create_without_wrapping)

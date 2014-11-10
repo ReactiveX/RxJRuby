@@ -19,17 +19,17 @@ describe Java::RxLangJruby::JRubyFunctionWrapper do
   subject { described_class.new(JRuby.runtime.get_current_context, lambda {|*args| spy.call(args); args}) }
 
   let(:interfaces) do
-    [Java::RxUtilFunctions::Func0,
-     Java::RxUtilFunctions::Func1,
-     Java::RxUtilFunctions::Func2,
-     Java::RxUtilFunctions::Func3,
-     Java::RxUtilFunctions::Func4,
-     Java::RxUtilFunctions::Func5,
-     Java::RxUtilFunctions::Func6,
-     Java::RxUtilFunctions::Func7,
-     Java::RxUtilFunctions::Func8,
-     Java::RxUtilFunctions::Func9,
-     Java::RxUtilFunctions::FuncN]
+    [Java::RxFunctions::Func0,
+     Java::RxFunctions::Func1,
+     Java::RxFunctions::Func2,
+     Java::RxFunctions::Func3,
+     Java::RxFunctions::Func4,
+     Java::RxFunctions::Func5,
+     Java::RxFunctions::Func6,
+     Java::RxFunctions::Func7,
+     Java::RxFunctions::Func8,
+     Java::RxFunctions::Func9,
+     Java::RxFunctions::FuncN]
   end
 
   it "implements the interfaces" do

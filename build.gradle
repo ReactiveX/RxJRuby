@@ -5,6 +5,10 @@ buildscript {
 
 apply plugin: 'rxjava-project'
 
+configurations {
+    rspec
+}
+
 dependencies {
     compile 'io.reactivex:rxjava:1.0.+'
     compile 'org.jruby:jruby:1.7+'
@@ -22,10 +26,6 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    rspec
-}
-
 sourceSets {
     test {
         resources {
@@ -33,3 +33,11 @@ sourceSets {
         }
     }
 }
+
+task(rspec, type: JavaExec, dependsOn: 'classes') {
+    main 'org.jruby.Main'
+    classpath configurations.rspec + runtimeClasspath
+    args 'classpath:bin/rspec', 'src/spec/ruby'
+}
+
+tasks.check.dependsOn << 'rspec'

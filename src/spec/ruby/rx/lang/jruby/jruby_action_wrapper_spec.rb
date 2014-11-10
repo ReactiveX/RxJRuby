@@ -19,11 +19,11 @@ describe Java::RxLangJruby::JRubyActionWrapper do
   subject { described_class.new(JRuby.runtime.get_current_context, lambda {|*args| spy.call(args)}) }
 
   let(:interfaces) do
-    [Java::RxUtilFunctions::Action,
-     Java::RxUtilFunctions::Action0,
-     Java::RxUtilFunctions::Action1,
-     Java::RxUtilFunctions::Action2,
-     Java::RxUtilFunctions::Action3]
+    [Java::RxFunctions::Action,
+     Java::RxFunctions::Action0,
+     Java::RxFunctions::Action1,
+     Java::RxFunctions::Action2,
+     Java::RxFunctions::Action3]
   end
 
   it "implements the interfaces" do
